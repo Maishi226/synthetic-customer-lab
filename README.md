@@ -1,393 +1,151 @@
-# Team
+# Synthetic Customer Lab
 
-This project was developed by a **3-person team** for the **University of Auckland × BNZ Hackathon**.
+An AI-assisted pre-launch testing platform for banking campaigns, developed as a hackathon MVP for the **University of Auckland × BNZ Hackathon**.
 
-The team collaborated across different areas including:
+Synthetic Customer Lab helps banking teams evaluate marketing messages, customer communications, and user-interface experiences before they reach real customers. It simulates how different customer segments may understand, trust, and respond to a campaign, then highlights risks and recommends improvements.
 
-- Machine Learning customer segmentation.
-- Backend API development and AI integration.
-- Frontend application development and user experience design.
+> [!IMPORTANT]
+> This prototype supports early customer research and decision-making. It does not replace real customer testing, accessibility validation, compliance review, or operational review.
 
-Each team member contributed to different parts of the end-to-end system, combining machine learning, generative AI, and software engineering to build the Synthetic Customer Lab prototype.
+## Key Features
 
-Synthetic Customer Lab
+- **AI message analysis** — evaluates clarity, trust, emotional impact, fairness, financial wellbeing, and communication effectiveness.
+- **Machine-learning segmentation** — uses customer behaviour patterns and K-Means clustering to identify meaningful customer groups.
+- **Dynamic persona generation** — creates synthetic personas based on the campaign, audience, segment, channel, and timing.
+- **Customer reaction simulation** — estimates trust, understanding, emotional response, accessibility concerns, and likelihood of action.
+- **Campaign optimisation** — suggests clearer wording, stronger calls to action, better benefits, and reduced ambiguity.
+- **Optional screenshot analysis** — reviews information hierarchy, readability, button clarity, and accessibility risks.
+- **Risk scoring** — surfaces customer, accessibility, and operational risks before launch.
 
-Synthetic Customer Lab is a hackathon MVP developed for the University of Auckland × BNZ Hackathon.
+## How It Works
 
-It is an AI-assisted pre-launch testing platform that allows banking teams to evaluate marketing messages, customer communications, and UI experiences before releasing them to real customers.
+```mermaid
+flowchart TD
+    A[Marketing team] --> B[Synthetic Customer Lab]
+    B --> C[OpenAI API]
+    B --> D[Customer Segmentation Service]
+    D --> E[K-Means model]
+    E --> F[Customer segments]
+    F --> B
+    B --> G[Synthetic personas]
+    G --> H[Customer reaction simulation]
+    H --> I[Risk signals and recommendations]
+```
 
-Instead of sending one generic message to all customers, this system simulates how different customer groups may interpret, trust, and react to a banking campaign.
+The solution consists of two connected services:
 
-The platform combines:
+1. **Synthetic Customer Lab** — provides the frontend, backend API, AI integration, persona generation, simulations, risk scoring, and recommendations.
+2. **[Bank Customer Segmentation Service](https://github.com/Maishi226/bank-segmentation-service)** — performs behaviour analysis, feature engineering, K-Means clustering, segment assignment, and customer profile generation.
 
-* Customer segmentation using machine learning.
-* Dynamic synthetic customer persona generation.
-* AI-powered customer reaction simulation.
-* Marketing message analysis.
-* Risk detection and improvement recommendations.
-* Optional UI screenshot analysis.
+The segmentation service must be running before simulations can be performed.
 
-It acts as an early-stage assurance layer for banking campaigns, helping teams identify potential confusion, trust issues, accessibility concerns, and customer risks before launch.
+## Example Use Case
 
-This MVP is designed to support customer research and decision-making, not replace real customer testing, compliance review, or accessibility validation.
+**Feature:** Smart overdraft warning  
+**Message:** “Your account may go into overdraft before Friday. Consider transferring $120 from savings.”  
+**Target audience:** Customers with a low balance and upcoming bills  
+**Channel:** Mobile notification  
+**Timing:** Two days before the expected overdraft
 
-⸻
+The platform tests the message against multiple synthetic customer groups and reports:
 
-System Architecture
+- How well each group understands the message
+- Expected trust and emotional response
+- Possible financial-wellbeing or accessibility concerns
+- Likely customer actions
+- Risks and suggested message improvements
 
-Synthetic Customer Lab consists of two connected services:
+## Technology Stack
 
-1. Synthetic Customer Lab (Main Application)
+| Area | Technologies |
+| --- | --- |
+| Frontend | React, TypeScript, Vite, Tailwind CSS |
+| Backend | FastAPI, Python, REST API |
+| Machine learning | Scikit-learn, K-Means clustering |
+| AI | OpenAI API |
+| Authentication | Supabase Authentication |
 
-Repository:
+## Project Structure
 
-https://github.com/Maishi226/bnz-hkt
-
-Responsible for:
-
-* Frontend user interface.
-* Backend API.
-* OpenAI integration.
-* Synthetic customer generation.
-* Customer simulation.
-* Campaign analysis.
-* Risk scoring.
-* Recommendation generation.
-
-⸻
-
-2. Bank Customer Segmentation Service
-
-Repository:
-
-https://github.com/Maishi226/bank-segmentation-service
-
-Responsible for:
-
-* Customer behaviour analysis.
-* Machine learning based segmentation.
-* K-Means clustering.
-* Segment assignment.
-* Customer profile generation.
-
-The two repositories work together.
-
-The segmentation service must be running before using the Synthetic Customer Lab because the simulation pipeline depends on customer segment information.
-
-Architecture:
-
-                 Marketing Team
-                       |
-                       |
-                Synthetic Customer Lab
-                       |
-        --------------------------------
-        |                              |
-        |                              |
-   OpenAI GPT-5.5              Segmentation Service
-                                      |
-                                      |
-                               K-Means ML Model
-                                      |
-                                      |
-                            Customer Segments
-
-⸻
-
-Key Features
-
-1. AI Marketing Message Analysis
-
-The system analyses banking advertisements and communication messages.
-
-It evaluates:
-
-* Message clarity.
-* Customer trust.
-* Potential stress or anxiety.
-* Fairness concerns.
-* Financial wellbeing impact.
-* Operational risks.
-* Communication effectiveness.
-
-Example:
-
-Input:
-
-Get your first home loan with BNZ.
-Competitive rates and expert support available.
-
-Output:
-
-Strengths:
-- Clear financial goal.
-- Relevant customer benefit.
-Potential risks:
-- May not explain eligibility requirements.
-- Could create unrealistic expectations.
-Recommendations:
-- Add transparent qualification information.
-- Provide clearer next steps.
-
-⸻
-
-2. Machine Learning Customer Segmentation
-
-The platform integrates with the Bank Customer Segmentation Service.
-
-Customer behaviour data is processed using:
-
-* Feature engineering.
-* Standardisation.
-* K-Means clustering.
-* Segment assignment.
-
-The model identifies different customer groups based on behavioural patterns.
-
-Examples:
-
-Affluent Investors
-High value customers with:
-- Higher savings.
-- Investment activity.
-- Lower financial stress.
-Digital Everyday Customers
-Customers with:
-- Frequent app usage.
-- Regular transactions.
-- Preference for digital banking.
-
-These segments are used as the foundation for synthetic customer generation.
-
-⸻
-
-3. Dynamic Synthetic Persona Generation
-
-The system generates customer personas based on:
-
-* Campaign objective.
-* Target audience.
-* Banking message.
-* Customer segments.
-* Communication channel.
-* Timing.
-
-Each persona contains:
-
-* Demographic context.
-* Financial behaviour.
-* Banking relationship.
-* Needs and motivations.
-* Concerns.
-* Expected reaction.
-
-Example:
-
-Persona:
-Young First Home Buyer
-Characteristics:
-- Early career professional.
-- Saving for a deposit.
-- Interested in mortgage products.
-Reaction:
-Positive about support but concerned about affordability.
-
-⸻
-
-4. Synthetic Customer Simulation
-
-Generated personas are simulated as customers interacting with the banking message.
-
-The system evaluates:
-
-* Trust level.
-* Understanding.
-* Emotional response.
-* Financial wellbeing impact.
-* Accessibility concerns.
-* Likelihood of taking action.
-
-The simulation produces:
-
-* Customer reactions.
-* Segment-level insights.
-* Risk indicators.
-* Improvement recommendations.
-
-Example:
-
-Customer Segment:
-First Home Buyers
-Reaction:
-7.8 / 10 trust score
-Concerns:
-- Unsure about eligibility.
-- Needs clearer repayment information.
-Suggested improvement:
-Add mortgage calculator link and eligibility explanation.
-
-⸻
-
-5. AI Advertisement Optimisation
-
-After analysing customer reactions, the platform generates recommendations to improve campaign effectiveness.
-
-It can suggest:
-
-* Better wording.
-* More personalised messaging.
-* Different customer benefits.
-* Reduced ambiguity.
-* Improved call-to-action.
-
-Example:
-
-Original:
-
-Get a better mortgage today.
-
-Improved:
-
-Explore your first home options with BNZ.
-Understand your borrowing ability and receive personalised guidance.
-
-⸻
-
-6. UI Screenshot Analysis
-
-The system supports optional screenshot uploads.
-
-When OpenAI vision capability is enabled, it analyses:
-
-* Text hierarchy.
-* Button clarity.
-* Information layout.
-* Accessibility concerns.
-* Customer action clarity.
-
-Example checks:
-
-Potential issue:
-The primary action button is unclear.
-Recommendation:
-Use stronger CTA wording:
-"Check my eligibility"
-
-⸻
-
-7. Risk Scoring Framework
-
-The platform provides early risk indicators:
-
-Customer Risk
-
-* Confusing language.
-* Low trust.
-* Financial stress.
-* Unexpected customer reactions.
-
-Accessibility Risk
-
-* Poor readability.
-* Unclear actions.
-* Complex explanations.
-
-Operational Risk
-
-* Potential customer complaints.
-* Misunderstanding of product conditions.
-* Increased support workload.
-
-⸻
-
-Project Structure
-
+```text
 bnz-hkt/
 ├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── api/
-│   │   └── types/
-│
+│   └── src/
+│       ├── api/
+│       ├── components/
+│       ├── pages/
+│       └── types/
 ├── backend/
-│   ├── app/
-│   │   ├── main.py
-│   │   ├── models.py
-│   │   ├── personas.py
-│   │   ├── openai_client.py
-│   │   └── scoring.py
-│
+│   └── app/
+│       ├── main.py
+│       ├── models.py
+│       ├── openai_client.py
+│       ├── personas.py
+│       └── scoring.py
 └── README.md
+```
 
-⸻
+## Getting Started
 
-Running the Application
+### Prerequisites
 
-You need to run three services.
+- Python 3.10 or later
+- Node.js and npm
+- An OpenAI API key
+- A local copy of the [segmentation service](https://github.com/Maishi226/bank-segmentation-service)
 
-1. Start Customer Segmentation Service
+### 1. Start the Segmentation Service
 
-Repository:
-
-https://github.com/Maishi226/bank-segmentation-service
-
-cd ~/Desktop/bank-segmentation-service
+```bash
+cd bank-segmentation-service
 source .venv/bin/activate
 uvicorn app.main:app --reload --port 8000
+```
 
-Service:
+The service will be available at `http://127.0.0.1:8000`.
 
-http://127.0.0.1:8000
+### 2. Configure and Start the Backend
 
-⸻
+Create `backend/.env`:
 
-2. Start Backend
-
-cd ~/Desktop/bnz-hkt/backend
-source .venv/bin/activate
-uvicorn app.main:app --reload --port 8001
-
-Backend:
-
-http://127.0.0.1:8001
-
-⸻
-
-3. Start Frontend
-
-cd ~/Desktop/bnz-hkt/frontend
-npm install
-npm run dev
-
-Frontend:
-
-http://localhost:5173
-
-⸻
-
-Environment Configuration
-
-Backend .env:
-
+```env
 OPENAI_API_KEY=your_openai_api_key
 OPENAI_MODEL=gpt-5.5
 SEGMENTATION_SERVICE_URL=http://127.0.0.1:8000
+```
 
-The OpenAI key is only stored and used in the backend.
+Then start the backend:
 
-The frontend never accesses the OpenAI API key.
+```bash
+cd bnz-hkt/backend
+source .venv/bin/activate
+uvicorn app.main:app --reload --port 8001
+```
 
-⸻
+The backend will be available at `http://127.0.0.1:8001`.
 
-API Endpoints
+> [!NOTE]
+> The OpenAI API key is stored and used only by the backend. It must never be exposed to the frontend or committed to version control.
 
-Generate Personas
+### 3. Start the Frontend
 
-POST /api/generate-personas
+```bash
+cd bnz-hkt/frontend
+npm install
+npm run dev
+```
 
-Input:
+Open `http://localhost:5173` in your browser.
 
+## API Overview
+
+### Generate Personas
+
+`POST /api/generate-personas`
+
+Example request:
+
+```json
 {
   "featureName": "First Home Buyer Campaign",
   "bankingMessage": "Buy your first home with BNZ",
@@ -396,143 +154,68 @@ Input:
   "sendTiming": "Monday morning",
   "personaCount": 5
 }
+```
 
-Returns:
+Returns synthetic customer personas, customer characteristics, and segment information.
 
-* Synthetic customer personas.
-* Customer characteristics.
-* Segment information.
+### Analyse an Advertisement
 
-⸻
+`POST /api/analyze-ad`
 
-Analyse Advertisement
+Returns marketing analysis, risk signals, and improvement recommendations.
 
-POST /api/analyze-ad
+### Run a Simulation
 
-Returns:
+`POST /api/run-simulation-jobs`
 
-* Marketing analysis.
-* Risk signals.
-* Recommendations.
+Runs the full pipeline:
 
-⸻
+```text
+Customer segments → Synthetic personas → AI simulation
+                  → Customer reactions → Optimisation suggestions
+```
 
-Run Simulation
+Returns an overall campaign score, persona reactions, risk factors, and improved message suggestions.
 
-POST /api/run-simulation-jobs
+## Risk Framework
 
-Runs:
+| Risk area | Example signals |
+| --- | --- |
+| Customer | Confusing language, low trust, financial stress, unexpected reactions |
+| Accessibility | Poor readability, unclear actions, complex explanations |
+| Operational | Customer complaints, misunderstood conditions, increased support demand |
 
-Customer segments
-        |
-Synthetic personas
-        |
-AI simulation
-        |
-Customer reactions
-        |
-Optimisation suggestions
+## Limitations and Responsible Use
 
-Returns:
+Synthetic personas are simulated and do not represent real individuals. Their responses are indicative rather than predictive, and generated demographic or behavioural details may not reflect information a bank actually knows about its customers.
 
-* Overall campaign score.
-* Persona reactions.
-* Risk factors.
-* Improved message suggestions.
+Use this platform as:
 
-⸻
+- A campaign risk-screening tool
+- A communication-improvement assistant
+- An early pre-launch testing layer
 
-Example Demo Scenario
+High-impact banking decisions should still include real customer research, accessibility testing, compliance review, and operational review.
 
-Feature:
+## Future Improvements
 
-Smart overdraft warning
+- Connect to anonymised banking behaviour data
+- Compare multiple messages through A/B testing
+- Incorporate real customer feedback loops
+- Add compliance-policy checking
+- Use reinforcement learning for campaign optimisation
+- Deploy to cloud infrastructure for production-scale usage
 
-Message:
+## Team
 
-Your account may go into overdraft before Friday.
-Consider transferring $120 from savings.
+This project was developed by a **three-person team** for the **University of Auckland × BNZ Hackathon**. The team collaborated across:
 
-Target customers:
+- Machine-learning customer segmentation
+- Backend API development and AI integration
+- Frontend development and user-experience design
 
-Customers with low balance and upcoming bills.
+Together, the team combined machine learning, generative AI, and software engineering to build the Synthetic Customer Lab prototype.
 
-Channel:
+## Disclaimer
 
-Mobile notification
-
-Timing:
-
-2 days before expected overdraft
-
-The system evaluates how different customer groups may react before launch.
-
-⸻
-
-Technology Stack
-
-Frontend
-
-* React
-* TypeScript
-* Vite
-* Tailwind CSS
-
-Backend
-
-* FastAPI
-* Python
-* REST API
-
-Machine Learning
-
-* Scikit-learn
-* K-Means clustering
-
-AI
-
-* OpenAI GPT-5.5 API
-
-Authentication
-
-* Supabase Authentication
-
-⸻
-
-Limitations
-
-Synthetic personas are simulated customers and do not represent real individuals.
-
-For example, the system may generate personas such as:
-
-* First home buyers.
-* High value customers.
-* Digital banking users.
-
-However, real banks may not directly know all personal characteristics of customers.
-
-Therefore, this platform should be used as:
-
-* A campaign risk screening tool.
-* A communication improvement assistant.
-* A pre-launch testing layer.
-
-High-impact banking decisions should still include:
-
-* Real customer research.
-* Accessibility testing.
-* Compliance review.
-* Operational review.
-
-⸻
-
-Future Improvements
-
-Potential extensions:
-
-* Connect with real anonymised banking behaviour data.
-* Add reinforcement learning for campaign optimisation.
-* Support A/B testing of multiple marketing messages.
-* Integrate real customer feedback loops.
-* Add compliance policy checking.
-* Deploy on AWS for production-scale usage.
+This is a hackathon prototype and is not intended for production banking decisions without appropriate security, privacy, legal, compliance, accessibility, and model-risk assessments.
