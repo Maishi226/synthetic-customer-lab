@@ -9,6 +9,7 @@ The team collaborated across different areas including:
 - Frontend application development and user experience design.
 
 Each team member contributed to different parts of the end-to-end system, combining machine learning, generative AI, and software engineering to build the Synthetic Customer Lab prototype.
+
 Synthetic Customer Lab
 
 Synthetic Customer Lab is a hackathon MVP developed for the University of Auckland × BNZ Hackathon.
